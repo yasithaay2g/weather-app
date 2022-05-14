@@ -1,8 +1,26 @@
-<script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
-import { Head } from "@inertiajs/inertia-vue3";
-</script>
 
+<script>
+import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import BreezeNavLink from "@/Components/NavLink.vue";
+import { Head } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
+export default {
+    components: {
+        BreezeAuthenticatedLayout,
+        Head,
+        BreezeNavLink,
+        Link,
+    },
+    props: {
+        temperatures: Object,
+    },
+    methods: {
+        destroy(id) {
+            this.$inertia.delete(route("temperatures.destroy", id));
+        },
+    },
+};
+</script>
 <template>
     <Head title="Dashboard" />
 
@@ -18,25 +36,14 @@ import { Head } from "@inertiajs/inertia-vue3";
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title"><b>Colombo</b></h5>
-                                    <table class="table table-borderless">
+                                    <table class="table">
                                         <tbody>
-                                            <tr>
-                                                <th scope="row" style="width:40%;">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
+                                            <tr v-for="temperature in temperatures.data" :key="temperature.id">
+                                                <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
+                                                <td>{{ temperature.city1_temp_c }}</td>
+                                                <td>{{ temperature.city1_temp_f }}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-
-                                            </tr>
-                                             <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-
-                                            </tr>
+                                           
 
                                         </tbody>
                                     </table>
@@ -49,23 +56,12 @@ import { Head } from "@inertiajs/inertia-vue3";
                                     <h5 class="card-title"><b>Melbourne</b></h5>
                                     <table class="table table-borderless">
                                         <tbody>
-                                            <tr>
-                                                <th scope="row" style="width:40%;">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
+                                             <tr v-for="temperature in temperatures.data" :key="temperature.id">
+                                                <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
+                                                <td>{{ temperature.city2_temp_c }}</td>
+                                                <td>{{ temperature.city2_temp_f }}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-
-                                            </tr>
-                                             <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-
-                                            </tr>
+                                          
 
                                         </tbody>
                                     </table>

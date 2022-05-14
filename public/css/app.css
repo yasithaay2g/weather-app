@@ -632,17 +632,6 @@ select {
     max-width: 1536px;
   }
 }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
 .fixed {
   position: fixed;
 }
@@ -679,10 +668,6 @@ select {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 .my-4 {
   margin-top: 1rem;
@@ -741,9 +726,6 @@ select {
 }
 .mt-1 {
   margin-top: 0.25rem;
-}
-.mr-auto {
-  margin-right: auto;
 }
 .block {
   display: block;
@@ -1004,10 +986,6 @@ select {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
-.py-12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1060,10 +1038,6 @@ select {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
 .font-medium {
   font-weight: 500;
 }
@@ -1081,9 +1055,6 @@ select {
 }
 .leading-4 {
   line-height: 1rem;
-}
-.leading-tight {
-  line-height: 1.25;
 }
 .tracking-wider {
   letter-spacing: 0.05em;
