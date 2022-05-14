@@ -33,8 +33,10 @@ class TemperatureController extends Controller
             $this->temperatureService->storeTemperature($location2Temperature, $temp_id);
             $temperatures=$this->temperatureService->getUserLogTempDetails();
 
+
+
             return Inertia::render('Dashboard', [
-                'temperatures' => $temperatures   
+                'temperatures' => $temperatures
             ]);
 
         } catch (BaseException $exc) {

@@ -71,7 +71,7 @@ class TemperatureRepository
     public function getUserLogTempDetails()
     {
         try {
-            return $this->model->where('user_id', Auth::user()->id)->get()->toArray();
+            return $this->model->where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get()->toArray();
         } catch (\Exception $exc) {
             throw new BaseException(1002);
         }
