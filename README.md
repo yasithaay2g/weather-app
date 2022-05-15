@@ -72,6 +72,18 @@ An approachable, performant and versatile framework for building web user interf
 - Vue.js
 - <a href="https://inertiajs.com/" target="_blank">inertiajs.com.</a>
 - Open Weather API / https://openweathermap.org/api/one-call-api
+      
+      
+### Features
+
+- Laravel
+- Vue.js
+- Inertia.js
+- Repository Pattern
+- JSON format
+- Dependency injection
+- OOP
+- Bootstrap
 
 
 ### First steps
