@@ -31,6 +31,8 @@ class TemperatureRepository
 
     public function storeTemperature($locationTemperature, $temp_id)
     {
+
+
         try {
             if ($temp_id == 0) {
                 $tempData = [];
@@ -41,6 +43,8 @@ class TemperatureRepository
                 $tempData['city1_temp_f'] = round($fah, 2);
                 $tempData['city1_temp_c'] = round($ce, 2);
                 $temp = $this->model->create($tempData);
+
+
                 return $temp->id;
             } else {
                 $tempData = [];
@@ -55,6 +59,8 @@ class TemperatureRepository
             }
 
         } catch (\Exception $exc) {
+
+dd($exc);
             throw new BaseException(1002);
         }
     }
@@ -76,5 +82,45 @@ class TemperatureRepository
             throw new BaseException(1002);
         }
     }
+
+    public function getTempDetailsByHottest()
+    {
+        try {
+            return $this->model->where('user_id', Auth::user()->id)->orderBy('city1_temp_c','DESC')->get()->toArray();
+        } catch (\Exception $exc) {
+            throw new BaseException(1002);
+        }
+    }
+
+
+     //when user login save data
+    public function getTempDetailsByAPI()
+    {
+        try {
+        //Colombo
+        $lat1 = 6.92;
+        $lon1 = 79.86;
+        $location1Temperature = $this->getLocationTemperature($lat1, $lon1);
+
+        //Melbourne
+        $lat2 = -37.77;
+        $lon2 = 145.05;
+        $location2Temperature = $this->getLocationTemperature($lat2, $lon2);
+
+        $temp_id = $this->storeTemperature($location1Temperature, 0);
+        $this->storeTemperature($location2Temperature, $temp_id);
+
+        } catch (\Exception $exc) {
+
+            dd($exc);
+            throw new BaseException(1002);
+        }
+    }
+
+
+
+
+
+
 
 }

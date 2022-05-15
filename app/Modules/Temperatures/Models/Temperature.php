@@ -27,5 +27,7 @@ class Temperature extends Model
         'status',
         
     ];
-    
+
+   // protected $dateFormat = 'm/d/Y';
+   protected $dateFormat = 'Y-m-d'; 
 }

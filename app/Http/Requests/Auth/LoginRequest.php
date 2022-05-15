@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Modules\Temperatures\Repositories\TemperatureRepository;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,14 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
+
+    protected $repo;
+
+    public function __construct(TemperatureRepository $tempRepo)
+    {
+        $this->repo = $tempRepo;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -45,13 +54,16 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
+
+        //when user login save data
+        $this->repo->getTempDetailsByAPI();
 
         RateLimiter::clear($this->throttleKey());
     }
@@ -65,7 +77,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -88,6 +100,7 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
+}   }
 }

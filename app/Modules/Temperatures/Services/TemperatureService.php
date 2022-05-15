@@ -4,9 +4,11 @@ namespace App\Modules\Temperatures\Services;
 
 use App\Exceptions\BaseException;
 use App\Modules\Temperatures\Repositories\TemperatureRepository;
+use App\Modules\Temperatures\Transformers\TemperatureTransformer;
 
 class TemperatureService
 {
+    use TemperatureTransformer;
     protected $repo;
 
     public function __construct(TemperatureRepository $tempRepo)
@@ -20,13 +22,7 @@ class TemperatureService
             $allTemperatures = $this->repo->getLocationTemperature($lat, $lon);
             return $allTemperatures;
 
-            // $returningArticles = [];
-            // if(count($allTemperatures) > 0){
-            //     foreach ($allTemperatures as $article) {
-            //         $returningTemperatures[] = $this->transformTemperature($article);
-            //     }
-            // }
-            // return $returningTemperatures;
+          
         } catch (BaseException $exc) {
             throw $exc;
         } catch (\Exception $exc) {
@@ -48,13 +44,44 @@ class TemperatureService
     public function getUserLogTempDetails()
     {
         try {
-            return $this->repo->getUserLogTempDetails();
+            $allTemperatures = $this->repo->getUserLogTempDetails();
+              $returningTemperatures = [];
+            if(count($allTemperatures) > 0){
+                foreach ($allTemperatures as $temperature) {
+                    $returningTemperatures[] = $this->transformTemperature($temperature);
+                }
+            }
+            return $returningTemperatures;
         } catch (BaseException $exc) {
             throw $exc;
         } catch (\Exception $exc) {
             throw new BaseException(1009, $exc->getMessage());
         }
     }
+
+     public function getTempDetailsByHottest()
+    {
+        try {
+            return $this->repo->getTempDetailsByHottest();
+        } catch (BaseException $exc) {
+            throw $exc;
+        } catch (\Exception $exc) {
+            throw new BaseException(1009, $exc->getMessage());
+        }
+    }
+
+
+
+    // public function getUserLogTempDetails()
+    // {
+    //     try {
+    //         return $this->repo->getUserLogTempDetails();
+    //     } catch (BaseException $exc) {
+    //         throw $exc;
+    //     } catch (\Exception $exc) {
+    //         throw new BaseException(1009, $exc->getMessage());
+    //     }
+    // }
 
 
 

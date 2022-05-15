@@ -19,8 +19,17 @@ export default {
         destroy(id) {
             this.$inertia.delete(route("temperatures.destroy", id));
         },
+
+         changeOrder(){
+              this.$inertia.get(route("temperature.order"));
+         },
+
+         
+         
     },
 };
+
+
 </script>
 
 
@@ -35,10 +44,10 @@ export default {
                     <div class="row col-lg-12 mt-3 ml-2 mr-4">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-3"></div>
-                                    <div class="col-md-3"><button type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
+                                    <div class="col-md-3"><button  @click="changeOrder()" type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
                                     <div class="col-md-3"><button type="button" class="btn btn-sm btn-block" style="background-color:purple; color: white;">Reset Order</button></div>
                     </div>
-              
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">

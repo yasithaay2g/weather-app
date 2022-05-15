@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Modules\Temperatures\Repositories\TemperatureRepository;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -14,6 +15,13 @@ use Inertia\Inertia;
 
 class RegisteredUserController extends Controller
 {
+
+    protected $repo;
+
+    public function __construct(TemperatureRepository $tempRepo)
+    {
+        $this->repo = $tempRepo;
+    }
     /**
      * Display the registration view.
      *
@@ -49,7 +57,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        //when user login save data
+        $this->repo->getTempDetailsByAPI();
         return redirect(RouteServiceProvider::HOME);
     }
 }

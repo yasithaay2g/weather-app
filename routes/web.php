@@ -25,12 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/dashboard', [TemperatureController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/temperature-order', [TemperatureController::class, "hottestFirst"])->middleware(['auth', 'verified'])->name('temperature.order');
+Route::get('/dashboard-reset', [TemperatureController::class, "resetOder"])->middleware(['auth', 'verified'])->name('temperature.order.reset');
 
 require __DIR__.'/auth.php';
