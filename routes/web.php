@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TemperatureController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +25,11 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+Route::get('/dashboard', [TemperatureController::class, "index"])->name('dashboard');
+Route::get('/temperature-order', [TemperatureController::class, "hottestFirst"])->name('temperature.order');
+Route::get('/temperature-reset', [TemperatureController::class, "resetOrder"])->name('temperature.order.reset');
+});
 require __DIR__.'/auth.php';
