@@ -12,23 +12,25 @@ export default {
         Link,
     },
     props: {
-        temperatures: Object,
+        temperatures1: Object,
+        temperatures2: Object,
+        city1:Object,
+        city2:Object,
 
     },
+
     methods: {
-        destroy(id) {
-            this.$inertia.delete(route("temperatures.destroy", id));
-        },
 
          changeOrder(){
               this.$inertia.get(route("temperature.order"));
          },
+        resetOrder(){
+              this.$inertia.get(route("temperature.order.reset"));
+         },
 
-         
          
     },
 };
-
 
 </script>
 
@@ -44,20 +46,20 @@ export default {
                     <div class="row col-lg-12 mt-3 ml-2 mr-4">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-3"></div>
-                                    <div class="col-md-3"><button  @click="changeOrder()" type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
-                                    <div class="col-md-3"><button type="button" class="btn btn-sm btn-block" style="background-color:purple; color: white;">Reset Order</button></div>
+                                    <div class="col-md-3"><button @click="changeOrder()" type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
+                                    <div class="col-md-3"><button @click="resetOrder()" type="button" class="btn btn-sm btn-block" style="background-color:purple; color: white;">Reset Order</button></div>
                     </div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>Colombo</b></h5>
+                                    <h5 class="card-title"><b>{{ city1 }}</b></h5>
                                     <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
-                                            <tr v-for="(temperature, index) in temperatures" :key="temperature.id">
+                                            <div v-if="temperatures1.length == 0" class="text-danger"> Data Not found. </div>
+                                            <tr v-for="(temperature, index) in temperatures1" :key="temperature.id">
                                                 <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
                                                 <td>{{ temperature.city1_temp_c }} C</td>
                                                 <td>{{ temperature.city1_temp_f }} F</td>
@@ -71,18 +73,16 @@ export default {
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>Melbourne</b></h5>
+                                    <h5 class="card-title"><b>{{ city2 }}</b></h5>
                                     <div class="table-responsive">
-
                                     <table class="table">
                                         <tbody>
-                                             <tr v-for="(temperature, index) in temperatures" :key="temperature.id">
+                                             <div v-if="temperatures2.length == 0"  class="text-danger"> Data Not found. </div>
+                                             <tr v-for="(temperature, index) in temperatures2" :key="temperature.id">
                                                 <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
                                                 <td>{{ temperature.city2_temp_c }} C</td>
                                                 <td>{{ temperature.city2_temp_f }} F</td>
                                             </tr>
-
-
                                         </tbody>
                                     </table>
                                     </div>
@@ -94,16 +94,14 @@ export default {
             </div>
 
             <div class="jumbotron">
-                <h1 class="display-4">Hello, world!</h1>
+                <h1 class="display-4">Hello, {{ $page.props.auth.user.name }}!</h1>
                 <p class="lead">
-                    This is a simple hero unit, a simple jumbotron-style
-                    component for calling extra attention to featured content or
-                    information.
+                    Current
+                    temperature of two cities
                 </p>
                 <hr class="my-4" />
                 <p>
-                    It uses utility classes for typography and spacing to space
-                    content out within the larger container.
+                   The task is to implement a small weather webapp.
                 </p>
                 <a class="btn btn-primary btn-lg" href="#" role="button"
                     >Learn more</a

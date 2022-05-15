@@ -59,10 +59,37 @@ class TemperatureService
         }
     }
 
-     public function getTempDetailsByHottest()
+     public function getTemp1DetailsByHottest()
+    {
+        try{
+       
+          $allTemperatures = $this->repo->getTemp1DetailsByHottest();
+          $returningTemperatures = [];
+        if(count($allTemperatures) > 0){
+            foreach ($allTemperatures as $temperature) {
+                $returningTemperatures[] = $this->transformTemperature($temperature);
+            }
+        }
+        return $returningTemperatures;
+        } catch (BaseException $exc) {
+            throw $exc;
+        } catch (\Exception $exc) {
+            throw new BaseException(1009, $exc->getMessage());
+        }
+    }
+
+    public function getTemp2DetailsByHottest()
     {
         try {
-            return $this->repo->getTempDetailsByHottest();
+     
+            $allTemperatures = $this->repo->getTemp2DetailsByHottest();
+            $returningTemperatures = [];
+          if(count($allTemperatures) > 0){
+              foreach ($allTemperatures as $temperature) {
+                  $returningTemperatures[] = $this->transformTemperature($temperature);
+              }
+          }
+          return $returningTemperatures;
         } catch (BaseException $exc) {
             throw $exc;
         } catch (\Exception $exc) {
@@ -72,16 +99,7 @@ class TemperatureService
 
 
 
-    // public function getUserLogTempDetails()
-    // {
-    //     try {
-    //         return $this->repo->getUserLogTempDetails();
-    //     } catch (BaseException $exc) {
-    //         throw $exc;
-    //     } catch (\Exception $exc) {
-    //         throw new BaseException(1009, $exc->getMessage());
-    //     }
-    // }
+
 
 
 

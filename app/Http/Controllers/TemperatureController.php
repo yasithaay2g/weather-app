@@ -17,23 +17,22 @@ class TemperatureController extends Controller
         $this->temperatureService = $temperatureService;
     }
 
+    /**
+     *  display a  list of the users login temperatures.
+     *
+     */
     public function index(Request $request)
     {
         try {
-            // //Colombo
-            // $lat1 = 6.92;
-            // $lon1 = 79.86;
-            // $location1Temperature = $this->temperatureService->getLocationTemperature($lat1, $lon1);
-            // //Melbourne
-            // $lat2 = -37.77;
-            // $lon2 = 145.05;
-            // $location2Temperature = $this->temperatureService->getLocationTemperature($lat2, $lon2);
-            // $temp_id = $this->temperatureService->storeTemperature($location1Temperature, 0);
-            // $this->temperatureService->storeTemperature($location2Temperature, $temp_id);
-            
-            $temperatures=$this->temperatureService->getUserLogTempDetails();
+
+            $temperatures1 = $this->temperatureService->getUserLogTempDetails();
+            $temperatures2 = $temperatures1;
+
             return Inertia::render('Dashboard', [
-                'temperatures' => $temperatures
+                'temperatures1' => $temperatures1,
+                'temperatures2' => $temperatures2,
+                'city1' => "Colombo",
+                'city2' => "Melbourne",
             ]);
 
         } catch (BaseException $exc) {
@@ -43,41 +42,58 @@ class TemperatureController extends Controller
         }
     }
 
-
+    /**
+     *  display a  list of hottest temperatures.
+     *
+     */
     public function hottestFirst(Request $request)
     {
 
+        try {
 
-    try {
+            $temperatures1 = $this->temperatureService->getTemp1DetailsByHottest();
+            $temperatures2 = $this->temperatureService->getTemp2DetailsByHottest();
+            return Inertia::render('Dashboard', [
+                'temperatures1' => $temperatures1,
+                'temperatures2' => $temperatures2,
+                'city1' => "Colombo",
+                'city2' => "Melbourne",
+            ]);
 
-        $temperatures=$this->temperatureService->getTempDetailsByHottest();
+        } catch (BaseException $exc) {
+            throw $exc;
+        } catch (\Exception $exc) {
+            throw new BaseException(1013, $exc->getMessage());
+        }
 
-        return Inertia::render('Dashboards', [
-            'temperatures' => $temperatures
-        ]);
-
-    } catch (BaseException $exc) {
-        throw $exc;
-    } catch (\Exception $exc) {
-        throw new BaseException(1013, $exc->getMessage());
     }
 
-    }
-
-    public function resetOder(Request $request)
+    /**
+     *  Reset temperature Order.
+     *
+     */
+    public function resetOrder(Request $request)
     {
 
+        try {
 
-    try {
+            $temperatures1 = $this->temperatureService->getUserLogTempDetails();
+            $temperatures2 = $temperatures1;
 
+            return Inertia::render('Dashboard', [
+                'temperatures1' => $temperatures1,
+                'temperatures2' => $temperatures2,
+                'city1' => "Colombo",
+                'city2' => "Melbourne",
 
-    } catch (BaseException $exc) {
-        throw $exc;
-    } catch (\Exception $exc) {
-        throw new BaseException(1013, $exc->getMessage());
+            ]);
+
+        } catch (BaseException $exc) {
+            throw $exc;
+        } catch (\Exception $exc) {
+            throw new BaseException(1013, $exc->getMessage());
+        }
+
     }
-
-    }
-
 
 }

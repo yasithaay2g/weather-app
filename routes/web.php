@@ -26,9 +26,10 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/dashboard', [TemperatureController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/temperature-order', [TemperatureController::class, "hottestFirst"])->middleware(['auth', 'verified'])->name('temperature.order');
-Route::get('/dashboard-reset', [TemperatureController::class, "resetOder"])->middleware(['auth', 'verified'])->name('temperature.order.reset');
-
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+Route::get('/dashboard', [TemperatureController::class, "index"])->name('dashboard');
+Route::get('/temperature-order', [TemperatureController::class, "hottestFirst"])->name('temperature.order');
+Route::get('/temperature-reset', [TemperatureController::class, "resetOrder"])->name('temperature.order.reset');
+});
 require __DIR__.'/auth.php';
