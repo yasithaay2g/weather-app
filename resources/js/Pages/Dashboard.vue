@@ -61,8 +61,8 @@ export default {
                                             <div v-if="temperatures1.length == 0" class="text-danger"> Data Not found. </div>
                                             <tr v-for="(temperature, index) in temperatures1" :key="temperature.id">
                                                 <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
-                                                <td>{{ temperature.city1_temp_c }} C</td>
-                                                <td>{{ temperature.city1_temp_f }} F</td>
+                                                <td>{{ temperature.city1_temp_c }} °C</td>
+                                                <td>{{ temperature.city1_temp_f }} °F</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -80,8 +80,8 @@ export default {
                                              <div v-if="temperatures2.length == 0"  class="text-danger"> Data Not found. </div>
                                              <tr v-for="(temperature, index) in temperatures2" :key="temperature.id">
                                                 <th scope="row" style="width:40%;">{{ temperature.created_at }}</th>
-                                                <td>{{ temperature.city2_temp_c }} C</td>
-                                                <td>{{ temperature.city2_temp_f }} F</td>
+                                                <td>{{ temperature.city2_temp_c }} °C</td>
+                                                <td>{{ temperature.city2_temp_f }} °F</td>
                                             </tr>
                                         </tbody>
                                     </table>
