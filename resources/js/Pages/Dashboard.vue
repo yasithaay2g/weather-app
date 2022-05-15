@@ -39,22 +39,22 @@ export default {
     <Head title="Dashboard" />
     <BreezeAuthenticatedLayout>
         <div class="container mt-4">
-            <div class="card">
-                <h2 class="card-header text-success">
+            <div class="card bg-dark">
+                <h1 class="card-header text-success" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
                     <b>Login Temperature</b>
-                </h2>
+                </h1>
                     <div class="row col-lg-12 mt-3 ml-2 mr-4">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-md-3"><button @click="changeOrder()" type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
-                                    <div class="col-md-3"><button @click="resetOrder()" type="button" class="btn btn-sm btn-block" style="background-color:purple; color: white;">Reset Order</button></div>
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-3"></div>
+                        <div class="col-md-3"><button @click="changeOrder()" type="button" class="btn btn-sm btn-block" style="background-color:pink;">Hottest First</button></div>
+                        <div class="col-md-3"><button @click="resetOrder()" type="button" class="btn btn-sm btn-block" style="background-color:purple; color: white;">Reset Order</button></div>
                     </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>{{ city1 }}</b></h5>
+                                    <h3 class="card-title text-primary"><b>{{ city1 }}</b></h3>
                                     <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
@@ -73,7 +73,7 @@ export default {
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>{{ city2 }}</b></h5>
+                                    <h3 class="card-title text-primary"><b>{{ city2 }}</b></h3>
                                     <div class="table-responsive">
                                     <table class="table">
                                         <tbody>

@@ -106,7 +106,7 @@ class TemperatureRepository
     public function getTemp1DetailsByHottest()
     {
         try {
-            return $this->model->where('user_id', Auth::user()->id)->orderBy('city1_temp_c', 'DESC')->select('city1_temp_c','city1_temp_c','created_at')->get()->toArray();
+            return $this->model->where('user_id', Auth::user()->id)->orderBy('city1_temp_c', 'DESC')->select('city1_temp_c','city1_temp_f','created_at')->get()->toArray();
         } catch (\Exception $exc) {
             throw new BaseException(1002);
         }
@@ -116,7 +116,7 @@ class TemperatureRepository
     public function getTemp2DetailsByHottest()
     {
         try {
-            return $this->model->where('user_id', Auth::user()->id)->orderBy('city2_temp_c', 'DESC')->select('city2_temp_c','city2_temp_c','created_at')->get()->toArray();
+            return $this->model->where('user_id', Auth::user()->id)->orderBy('city2_temp_c', 'DESC')->select('city2_temp_c','city2_temp_f','created_at')->get()->toArray();
         } catch (\Exception $exc) {
             throw new BaseException(1002);
         }
